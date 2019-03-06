@@ -8,6 +8,12 @@ namespace Employees
         // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                        "~/scripts/app/services/employeesService.js",
+                        "~/scripts/app/controllers/employeesController.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

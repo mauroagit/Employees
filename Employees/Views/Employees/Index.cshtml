@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Employees";
+}
+
+<h2>Employees</h2>
+<div class="row">
+    <div class="col-md-12" id="employeesDiv">
+        <p>
+            @Html.TextBox("Employee Id:", null, new { @class = "js-employ-id" })
+            @Html.ActionLink("Get Employees", "", null, new { @class = "btn btn-primary js-get-employees" })
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table" id="employeesTable">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Contract</th>
+                <th>Role Id</th>
+                <th>Role Name</th>
+                <th>Role Description</th>
+                <th>Hourly Salary</th>
+                <th>Monthly Salary</th>
+                <th>Annual Salary</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/app")
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            EmployeesController.init('#employeesDiv');
+        });
+    </script>
+}
