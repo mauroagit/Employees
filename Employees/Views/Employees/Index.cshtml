@@ -2,40 +2,48 @@
     ViewBag.Title = "Employees";
 }
 
-<h2>Employees</h2>
-<div class="row">
-    <div class="col-md-12" id="employeesDiv">
-        <p>
-            @Html.TextBox("Employee Id:", null, new { @class = "js-employ-id" })
-            @Html.ActionLink("Get Employees", "", null, new { @class = "btn btn-primary js-get-employees" })
-        </p>
+<div ng-app="employeesApp">
+    <div ng-controller="employeesController">
+        <h2>Employees</h2>
+        <div class="row">
+            <div class="col-md-12" id="employeesDiv">
+                <p>
+                    @Html.TextBox("Employee Id:", null, new { @class = "js-employ-id", ng_model = "searchId" })
+                    <input type="button" class="btn btn-primary", ng-click="getEmployees()" value="Get Employees" />
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table" id="employeesTable">
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Contract</th>
+                        <th>Role Id</th>
+                        <th>Role Name</th>
+                        <th>Role Description</th>
+                        <th>Hourly Salary</th>
+                        <th>Monthly Salary</th>
+                        <th>Annual Salary</th>
+                    </tr>
+                    <tr ng-repeat="employee in employees">
+                        <td>{{ employee.Id }}</td>
+                        <td>{{ employee.Name }}</td>
+                        <td>{{ employee.ContractTypeName }}</td>
+                        <td>{{ employee.RoleId | number }}</td>
+                        <td>{{ employee.RoleName }}</td>
+                        <td>{{ employee.RoleDescription }}</td>
+                        <td>{{ employee.HourlySalary | currency }}</td>
+                        <td>{{ employee.MonthlySalary | currency }}</td>
+                        <td>{{ employee.AnnualSalary | currency }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12">
-        <table class="table" id="employeesTable">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Contract</th>
-                <th>Role Id</th>
-                <th>Role Name</th>
-                <th>Role Description</th>
-                <th>Hourly Salary</th>
-                <th>Monthly Salary</th>
-                <th>Annual Salary</th>
-            </tr>
-        </table>
-    </div>
-</div>
-
+@Scripts.Render("~/bundles/angular")
 @Scripts.Render("~/bundles/app")
-@section scripts
-{
-    <script>
-        $(document).ready(function () {
-            EmployeesController.init('#employeesDiv');
-        });
-    </script>
-}
